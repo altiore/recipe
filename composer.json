@@ -1,5 +1,5 @@
 {
-    "name": "altiore/recipe",
+    "name": "altiore/yii2-recipe",
     "description": "Recipe Yii2 Module",
     "type": "yii2-extension",
     "license": "MIT",
@@ -11,7 +11,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "yiisoft/yii2": ">=2.0.4"
+        "yiisoft/yii2": ">=2.0.10",
+        "altiore/yii2-base": ">=0.0.2"
     },
     "autoload": {
         "psr-4": {
