@@ -1,0 +1,21 @@
+{
+    "name": "altiore/recipe",
+    "description": "Recipe Yii2 Module",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Razzwan",
+            "email": "razvanlomov@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": ">=2.0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "altiore\\recipe\\": ""
+        }
+    }
+}
