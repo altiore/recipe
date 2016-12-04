@@ -128,4 +128,12 @@ class Recipe extends ActiveRecord
     {
         return $this->hasMany(Stage::className(), ['recipe_id' => 'id']);
     }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return '/recipe/front/view?id=' . $this->id;
+    }
 }
