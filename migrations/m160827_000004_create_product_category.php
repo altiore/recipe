@@ -2,6 +2,7 @@
 namespace altiore\recipe\migrations;
 
 use altiore\base\console\Migration;
+use Yii;
 
 class m160827_000004_create_product_category extends Migration
 {
@@ -27,9 +28,12 @@ class m160827_000004_create_product_category extends Migration
         $this->createIndex(null, '{{%product_category}}', 'created_by');
         $this->createIndex(null, '{{%product_category}}', 'updated_by');
 
+        /** @var \yii\db\ActiveRecord $userClass */
+        $userClass = Yii::$app->getUser()->identityClass;
+
         $this->addForeignKey(null, '{{%product_category}}', 'category_id', '{{%product_category}}', 'id', 'RESTRICT', 'CASCADE');
-        $this->addForeignKey(null, '{{%product_category}}', 'created_by', '{{%user}}', 'id', 'SET NULL', 'CASCADE');
-        $this->addForeignKey(null, '{{%product_category}}', 'updated_by', '{{%user}}', 'id', 'SET NULL', 'CASCADE');
+        $this->addForeignKey(null, '{{%product_category}}', 'created_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');
+        $this->addForeignKey(null, '{{%product_category}}', 'updated_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');
     }
 
     public function safeDown()

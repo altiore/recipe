@@ -12,11 +12,14 @@
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": ">=2.0.10",
-        "altiore/yii2-base": ">=0.0.2"
+        "altiore/yii2-base": "^0.0"
     },
     "autoload": {
         "psr-4": {
             "altiore\\recipe\\": ""
         }
+    },
+    "extra": {
+        "bootstrap": "altiore\\recipe\\Bootstrap"
     }
 }

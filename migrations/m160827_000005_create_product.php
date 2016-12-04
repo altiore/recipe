@@ -2,6 +2,7 @@
 namespace altiore\recipe\migrations;
 
 use altiore\base\console\Migration;
+use Yii;
 
 class m160827_000005_create_product extends Migration
 {
@@ -27,8 +28,11 @@ class m160827_000005_create_product extends Migration
         $this->createIndex(null, '{{%product}}', 'updated_by');
         $this->createIndex(null, '{{%product}}', 'category_id');
 
-        $this->addForeignKey(null, '{{%product}}', 'created_by', '{{%user}}', 'id', 'SET NULL', 'CASCADE');
-        $this->addForeignKey(null, '{{%product}}', 'updated_by', '{{%user}}', 'id', 'SET NULL', 'CASCADE');
+        /** @var \yii\db\ActiveRecord $userClass */
+        $userClass = Yii::$app->getUser()->identityClass;
+
+        $this->addForeignKey(null, '{{%product}}', 'created_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');
+        $this->addForeignKey(null, '{{%product}}', 'updated_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');
         $this->addForeignKey(null, '{{%product}}', 'category_id', '{{%product_category}}', 'id', 'RESTRICT', 'CASCADE');
     }
 

@@ -18,7 +18,7 @@ class RecipeSearch extends Recipe
     public function rules()
     {
         return [
-            [['is_public', 'id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'is_public', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['title', 'description', 'text'], 'safe'],
         ];
     }
@@ -43,6 +43,8 @@ class RecipeSearch extends Recipe
     {
         $query = Recipe::find();
 
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -55,9 +57,10 @@ class RecipeSearch extends Recipe
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
-            'id'         => $this->id,
-            'is_public'  => $this->is_public,
+            'id' => $this->id,
+            'is_public' => $this->is_public,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
@@ -65,8 +68,8 @@ class RecipeSearch extends Recipe
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'text', $this->text])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'text', $this->text]);
 
         return $dataProvider;
     }

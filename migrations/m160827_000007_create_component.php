@@ -2,6 +2,7 @@
 namespace altiore\recipe\migrations;
 
 use altiore\base\console\Migration;
+use Yii;
 
 class m160827_000007_create_component extends Migration
 {
@@ -27,8 +28,11 @@ class m160827_000007_create_component extends Migration
         $this->createIndex(null, '{{%component}}', 'created_by');
         $this->createIndex(null, '{{%component}}', 'updated_by');
 
-        $this->addForeignKey(null, '{{%component}}', 'created_by', '{{%recipe}}', 'id', 'SET NULL', 'CASCADE');
-        $this->addForeignKey(null, '{{%component}}', 'updated_by', '{{%product}}', 'id', 'SET NULL', 'CASCADE');
+        /** @var \yii\db\ActiveRecord $userClass */
+        $userClass = Yii::$app->getUser()->identityClass;
+
+        $this->addForeignKey(null, '{{%component}}', 'created_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');
+        $this->addForeignKey(null, '{{%component}}', 'updated_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');
     }
 
     public function safeDown()
