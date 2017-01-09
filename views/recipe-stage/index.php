@@ -2,36 +2,33 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
-/* @var $searchModel altiore\recipe\models\RecipeSearch */
+/* @var $searchModel altiore\recipe\models\RecipeStageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('recipe', 'Recipes');
+$this->title = Yii::t('altioreRecipe', 'Recipe Stages');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="recipe-index">
+<div class="recipe-stage-index">
 
     <p>
-        <?= Html::a(Yii::t('recipe', 'Create Recipe'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('altioreRecipe', 'Create Recipe Stage'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            'description',
-            'text:ntext',
-            'is_public',
-            // 'created_at',
-            // 'updated_at',
+            'name',
+            'created_at:datetime',
+            //'updated_at',
             // 'created_by',
             // 'updated_by',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+</div>

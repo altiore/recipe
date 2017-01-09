@@ -5,12 +5,12 @@ namespace altiore\recipe\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use altiore\recipe\models\Recipe;
+use altiore\recipe\models\IngredientCategory;
 
 /**
- * RecipeSearch represents the model behind the search form about `altiore\recipe\models\Recipe`.
+ * IngredientCategorySearch represents the model behind the search form about `altiore\recipe\models\IngredientCategory`.
  */
-class RecipeSearch extends Recipe
+class IngredientCategorySearch extends IngredientCategory
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class RecipeSearch extends Recipe
     public function rules()
     {
         return [
-            [['id', 'is_public', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['title', 'description', 'text'], 'safe'],
+            [['id'], 'integer'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class RecipeSearch extends Recipe
      */
     public function search($params)
     {
-        $query = Recipe::find();
+        $query = IngredientCategory::find();
 
         // add conditions that should always apply here
 
@@ -60,16 +60,10 @@ class RecipeSearch extends Recipe
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'is_public' => $this->is_public,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

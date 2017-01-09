@@ -8,15 +8,12 @@
 
 namespace altiore\recipe;
 
-use altiore\recipe\models\Recipe;
 use Yii;
 use yii\base\Module;
-use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class RecipeModule
- *
- * @property Recipe[] $recipes
  */
 class RecipeModule extends Module
 {
@@ -25,23 +22,54 @@ class RecipeModule extends Module
      */
     public $recipeEditPerm = 'recipeEditPerm';
     /**
+     * @var string
+     */
+    public $userTable = '{{%user}}';
+    /**
+     * @var string
+     */
+    public $userPrimaryKey = 'id';
+    /**
      * @var int - page size for pagination in ActiveDataProvider
      */
     public $pageSize = 3;
+    /**
+     * @var string
+     */
+    public $msgCategoryName = 'altioreRecipe';
 
-    public function getRecipes()
+    /**
+     * Initialize
+     */
+    public function init()
     {
-        $query = Recipe::find();
+        parent::init();
+        $this->initI18N();
+    }
 
-        if (Yii::$app->getUser()->getIsGuest() || !Yii::$app->getUser()->can($this->recipeEditPerm)) {
-            $query->where(['is_public' => true]);
+    /**
+     * Yii i18n messages configuration for generating translations
+     *
+     * @return void
+     */
+    public function initI18N()
+    {
+        $reflector = new \ReflectionClass(get_class($this));
+        $dir = dirname($reflector->getFileName());
+        $cat = $this->msgCategoryName;
+        Yii::setAlias("@{$cat}", $dir);
+        $config = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => "@{$cat}/messages",
+            'forceTranslation' => true
+        ];
+        $globalConfig = ArrayHelper::getValue(Yii::$app->i18n->translations, "{$cat}*", []);
+        if (!empty($globalConfig)) {
+            $config = array_merge($config, is_array($globalConfig) ? $globalConfig : (array) $globalConfig);
         }
-
-        return new ActiveDataProvider([
-            'query'      => $query,
-            'pagination' => [
-                'pageSize' => $this->pageSize,
-            ],
-        ]);
+        if (!empty($this->i18n) && is_array($this->i18n)) {
+            $config = array_merge($config, $this->i18n);
+        }
+        Yii::$app->i18n->translations["{$cat}*"] = $config;
     }
 }

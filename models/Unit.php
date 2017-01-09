@@ -8,13 +8,10 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "{{%unit}}".
  *
- * @property integer            $id
- * @property string             $name
- *
- * @property Ingredient[]       $ingredients
- * @property ProductComponent[] $productComponents
- * @property Unit[]             $unitDivisors
- * @property Unit[]             $unitDividends
+ * @property integer $id
+ * @property string  $name
+ * @property string  $short
+ * @property string  $description
  */
 class Unit extends ActiveRecord
 {
@@ -32,9 +29,10 @@ class Unit extends ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'short'], 'required'],
             [['name'], 'unique'],
+            [['name', 'description'], 'string', 'max' => 255],
+            [['short'], 'string', 'max' => 10],
         ];
     }
 
@@ -44,42 +42,18 @@ class Unit extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'   => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'id'          => Yii::t('altioreRecipe', 'ID'),
+            'name'        => Yii::t('altioreRecipe', 'Name'),
+            'short'       => Yii::t('altioreRecipe', 'Short'),
+            'description' => Yii::t('altioreRecipe', 'Description'),
         ];
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return array
      */
-    public function getIngredients()
+    public static function column()
     {
-        return $this->hasMany(Ingredient::className(), ['unit_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductComponents()
-    {
-        return $this->hasMany(ProductComponent::className(), ['unit_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUnitDivisors()
-    {
-        return $this->hasMany(Unit::className(), ['id' => 'unit_divisor_id'])
-            ->viaTable('{{%unit_conversion}}', ['unit_dividend_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUnitDividends()
-    {
-        return $this->hasMany(Unit::className(), ['id' => 'unit_dividend_id'])
-            ->viaTable('{{%unit_conversion}}', ['unit_divisor_id' => 'id']);
+        return static::find()->select(['name'])->orderBy(['name' => SORT_ASC])->column();
     }
 }

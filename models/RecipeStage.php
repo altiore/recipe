@@ -8,22 +8,21 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "{{%ingredient}}".
+ * This is the model class for table "{{%recipe_stage}}".
  *
- * @property integer            $id
- * @property integer            $category_id
- * @property string             $name
- * @property string             $description
- * @property integer            $created_at
- * @property integer            $updated_at
- * @property integer            $created_by
- * @property integer            $updated_by
+ * @property integer                $id
+ * @property string                 $name
+ * @property string                 $text
+ * @property integer                $created_at
+ * @property integer                $updated_at
+ * @property integer                $created_by
+ * @property integer                $updated_by
  *
- * @property IngredientCategory $category
- * @property User               $createdBy
- * @property User               $updatedBy
+ * @property User                   $createdBy
+ * @property User                   $updatedBy
+ * @property RecipeIngredientLink[] $ingredients
  */
-class Ingredient extends ActiveRecord
+class RecipeStage extends ActiveRecord
 {
     /**
      * @var \altiore\recipe\RecipeModule
@@ -35,7 +34,7 @@ class Ingredient extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%ingredient}}';
+        return '{{%recipe_stage}}';
     }
 
     public function init()
@@ -51,18 +50,9 @@ class Ingredient extends ActiveRecord
     {
         return [
             [['created_at', 'updated_at', 'created_by', 'updated_by'], 'safe'],
-            [['category_id'], 'integer'],
-            [['name'], 'required'],
-            [['description'], 'string'],
+            [['name', 'text'], 'required'],
+            [['text'], 'string'],
             [['name'], 'string', 'max' => 255],
-            [['name'], 'unique'],
-            [
-                ['category_id'],
-                'exist',
-                'skipOnError'     => true,
-                'targetClass'     => IngredientCategory::className(),
-                'targetAttribute' => ['category_id' => 'id'],
-            ],
             [
                 ['created_by'],
                 'exist',
@@ -86,14 +76,13 @@ class Ingredient extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => Yii::t('altioreRecipe', 'ID'),
-            'category_id' => Yii::t('altioreRecipe', 'Category'),
-            'name'        => Yii::t('altioreRecipe', 'Name'),
-            'description' => Yii::t('altioreRecipe', 'Description'),
-            'created_at'  => Yii::t('altioreRecipe', 'Created At'),
-            'updated_at'  => Yii::t('altioreRecipe', 'Updated At'),
-            'created_by'  => Yii::t('altioreRecipe', 'Created By'),
-            'updated_by'  => Yii::t('altioreRecipe', 'Updated By'),
+            'id'         => Yii::t('altioreRecipe', 'ID'),
+            'name'       => Yii::t('altioreRecipe', 'Name'),
+            'text'       => Yii::t('altioreRecipe', 'Text'),
+            'created_at' => Yii::t('altioreRecipe', 'Created At'),
+            'updated_at' => Yii::t('altioreRecipe', 'Updated At'),
+            'created_by' => Yii::t('altioreRecipe', 'Created By'),
+            'updated_by' => Yii::t('altioreRecipe', 'Updated By'),
         ];
     }
 
@@ -106,14 +95,6 @@ class Ingredient extends ActiveRecord
             TimestampBehavior::class,
             BlameableBehavior::class,
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(IngredientCategory::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -133,10 +114,10 @@ class Ingredient extends ActiveRecord
     }
 
     /**
-     * @return array
+     * @return \yii\db\ActiveQuery
      */
-    public static function column()
+    public function getIngredients()
     {
-        return static::find()->select(['name'])->orderBy(['name' => SORT_ASC])->column();
+        return $this->hasMany(RecipeIngredientLink::class, ['recipe_stage_id' => 'id']);
     }
 }

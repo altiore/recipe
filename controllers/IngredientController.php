@@ -3,16 +3,17 @@
 namespace altiore\recipe\controllers;
 
 use Yii;
-use altiore\recipe\models\Recipe;
-use altiore\recipe\models\RecipeSearch;
+use altiore\recipe\models\Ingredient;
+use altiore\recipe\models\IngredientSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RecipeController implements the CRUD actions for Recipe model.
+ * IngredientController implements the CRUD actions for Ingredient model.
  */
-class FrontController extends Controller
+class IngredientController extends Controller
 {
     /**
      * @inheritdoc
@@ -20,6 +21,15 @@ class FrontController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -30,12 +40,12 @@ class FrontController extends Controller
     }
 
     /**
-     * Lists all Recipe models.
+     * Lists all Ingredient models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new RecipeSearch();
+        $searchModel = new IngredientSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +55,7 @@ class FrontController extends Controller
     }
 
     /**
-     * Displays a single Recipe model.
+     * Displays a single Ingredient model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +67,13 @@ class FrontController extends Controller
     }
 
     /**
-     * Creates a new Recipe model.
+     * Creates a new Ingredient model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Recipe();
+        $model = new Ingredient();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +85,7 @@ class FrontController extends Controller
     }
 
     /**
-     * Updates an existing Recipe model.
+     * Updates an existing Ingredient model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +104,7 @@ class FrontController extends Controller
     }
 
     /**
-     * Deletes an existing Recipe model.
+     * Deletes an existing Ingredient model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +117,15 @@ class FrontController extends Controller
     }
 
     /**
-     * Finds the Recipe model based on its primary key value.
+     * Finds the Ingredient model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Recipe the loaded model
+     * @return Ingredient the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Recipe::findOne($id)) !== null) {
+        if (($model = Ingredient::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

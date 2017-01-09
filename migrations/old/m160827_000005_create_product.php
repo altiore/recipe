@@ -4,6 +4,10 @@ namespace altiore\recipe\migrations;
 use altiore\base\console\Migration;
 use Yii;
 
+/**
+ * Class m160827_000005_create_product
+ * @property \altiore\recipe\RecipeModule $module
+ */
 class m160827_000005_create_product extends Migration
 {
     public function safeUp()
@@ -28,8 +32,7 @@ class m160827_000005_create_product extends Migration
         $this->createIndex(null, '{{%product}}', 'updated_by');
         $this->createIndex(null, '{{%product}}', 'category_id');
 
-        /** @var \yii\db\ActiveRecord $userClass */
-        $userClass = Yii::$app->getUser()->identityClass;
+        $userTable = $this->module->
 
         $this->addForeignKey(null, '{{%product}}', 'created_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');
         $this->addForeignKey(null, '{{%product}}', 'updated_by', $userClass::getTableSchema(), $userClass::primaryKey(), 'SET NULL', 'CASCADE');

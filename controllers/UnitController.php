@@ -3,16 +3,16 @@
 namespace altiore\recipe\controllers;
 
 use Yii;
-use altiore\recipe\models\Recipe;
-use altiore\recipe\models\RecipeSearch;
+use altiore\recipe\models\Unit;
+use altiore\recipe\models\UnitSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RecipeController implements the CRUD actions for Recipe model.
+ * UnitController implements the CRUD actions for Unit model.
  */
-class RecipeController extends Controller
+class UnitController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class RecipeController extends Controller
     }
 
     /**
-     * Lists all Recipe models.
+     * Lists all Unit models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new RecipeSearch();
+        $searchModel = new UnitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class RecipeController extends Controller
     }
 
     /**
-     * Displays a single Recipe model.
+     * Displays a single Unit model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class RecipeController extends Controller
     }
 
     /**
-     * Creates a new Recipe model.
+     * Creates a new Unit model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Recipe();
+        $model = new Unit();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class RecipeController extends Controller
     }
 
     /**
-     * Updates an existing Recipe model.
+     * Updates an existing Unit model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class RecipeController extends Controller
     }
 
     /**
-     * Deletes an existing Recipe model.
+     * Deletes an existing Unit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class RecipeController extends Controller
     }
 
     /**
-     * Finds the Recipe model based on its primary key value.
+     * Finds the Unit model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Recipe the loaded model
+     * @return Unit the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Recipe::findOne($id)) !== null) {
+        if (($model = Unit::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

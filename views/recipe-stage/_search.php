@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model altiore\recipe\models\RecipeSearch */
+/* @var $model altiore\recipe\models\RecipeStageSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="recipe-search">
+<div class="recipe-stage-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,25 +17,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'title') ?>
-
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'text') ?>
 
-    <?= $form->field($model, 'is_public') ?>
+    <?= $form->field($model, 'created_at') ?>
 
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
+    <?= $form->field($model, 'updated_at') ?>
 
     <?php // echo $form->field($model, 'created_by') ?>
 
     <?php // echo $form->field($model, 'updated_by') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('recipe', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('recipe', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('altioreRecipe', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('altioreRecipe', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
