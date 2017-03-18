@@ -24,8 +24,6 @@ class IngredientForm extends Model
     public function rules()
     {
         return [
-            [['name', 'amount', 'unit'], 'required'],
-            [['unit'], 'integer'],
             [['amount'], 'double'],
             [['name', 'unit'], 'string', 'max' => 255],
         ];

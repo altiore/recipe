@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class ReactIngredientsComponentAsset extends AssetBundle
 {
-    public $sourcePath = YII_ENV_DEV ? '@react/dev' : '@react/build';
+    public $sourcePath = '@recipe_resources';
     public $css = [
         'https://fonts.googleapis.com/icon?family=Material+Icons',
     ];

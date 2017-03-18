@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <img src="<?=$model->image->getAbsoluteUrl() ?>" />
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [

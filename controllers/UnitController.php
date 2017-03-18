@@ -2,33 +2,17 @@
 
 namespace altiore\recipe\controllers;
 
+use backend\controllers\BaseController;
 use Yii;
 use altiore\recipe\models\Unit;
 use altiore\recipe\models\UnitSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UnitController implements the CRUD actions for Unit model.
  */
-class UnitController extends Controller
+class UnitController extends BaseController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Unit models.
      * @return mixed

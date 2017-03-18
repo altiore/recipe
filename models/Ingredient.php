@@ -137,6 +137,6 @@ class Ingredient extends ActiveRecord
      */
     public static function column()
     {
-        return static::find()->select(['name'])->orderBy(['name' => SORT_ASC])->column();
+        return static::find()->select(['name'])->indexBy('name')->orderBy(['name' => SORT_ASC])->column();
     }
 }

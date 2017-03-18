@@ -2,43 +2,19 @@
 
 namespace altiore\recipe\controllers;
 
+use backend\controllers\BaseController;
 use Yii;
 use altiore\recipe\models\Ingredient;
 use altiore\recipe\models\IngredientSearch;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * IngredientController implements the CRUD actions for Ingredient model.
  */
-class IngredientController extends Controller
+class IngredientController extends BaseController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Ingredient models.
      * @return mixed

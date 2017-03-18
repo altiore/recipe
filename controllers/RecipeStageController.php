@@ -3,35 +3,17 @@
 namespace altiore\recipe\controllers;
 
 use altiore\recipe\forms\RecipeStageForm;
+use backend\controllers\BaseController;
 use Yii;
 use altiore\recipe\models\RecipeStage;
 use altiore\recipe\models\RecipeStageSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * RecipeStageController implements the CRUD actions for RecipeStage model.
  */
-class RecipeStageController extends Controller
+class RecipeStageController extends BaseController
 {
-    public $enableCsrfValidation = false;
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all RecipeStage models.
      * @return mixed
@@ -71,11 +53,11 @@ class RecipeStageController extends Controller
         $formModel = new RecipeStageForm([
             'recipeStage' => $model,
         ]);
-        if ($formModel->load(Yii::$app->request->post(), 'RecipeStage') && $formModel->save()) {
+        if ($formModel->load(Yii::$app->request->post()) && $formModel->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $formModel,
             ]);
         }
     }
@@ -93,11 +75,11 @@ class RecipeStageController extends Controller
         $formModel = new RecipeStageForm([
             'recipeStage' => $model,
         ]);
-        if ($formModel->load(Yii::$app->request->post(), 'RecipeStage') && $formModel->save()) {
+        if ($formModel->load(Yii::$app->request->post()) && $formModel->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model' => $formModel,
             ]);
         }
     }
