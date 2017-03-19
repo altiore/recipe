@@ -110,12 +110,12 @@ class RecipeStageForm extends Model
                     }
                 }
 
-                if (
-                    !$this->image instanceof UploadedFile
-                    || !($fullFileName = Image::saveImage($this->recipeStage, $this->image))
-                ) {
-                    throw new \Exception();
+                if ($this->image instanceof UploadedFile) {
+                    if (!($fullFileName = Image::saveImage($this->recipeStage, $this->image))) {
+                        throw new \Exception();
+                    }
                 }
+
 
                 $transaction->commit();
             } catch (\Exception $exception) {
