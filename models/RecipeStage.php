@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property string                 $imagePath
  * @property integer                $image_id
  * @property string                 $text
+ * @property string                 $description
  * @property integer                $created_at
  * @property integer                $updated_at
  * @property integer                $created_by
@@ -61,7 +62,7 @@ class RecipeStage extends ActiveRecord implements ImageSavableInterface
             [['created_at', 'updated_at', 'created_by', 'updated_by', 'image_id'], 'safe'],
             [['name', 'text'], 'required'],
             [['is_published'], 'boolean'],
-            [['text'], 'string'],
+            [['text', 'description'], 'string'],
             [['name'], 'string', 'max' => 255],
             [
                 ['created_by'],
@@ -105,6 +106,26 @@ class RecipeStage extends ActiveRecord implements ImageSavableInterface
         return [
             TimestampBehavior::class,
             BlameableBehavior::class,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function fields()
+    {
+        return [
+            'id',
+            'name',
+            'image',
+            'description',
+            'text',
+            'created_at',
+            'created_by',
+            'updated_at',
+            'updated_by',
+            'ingredients',
+            'stages',
         ];
     }
 
