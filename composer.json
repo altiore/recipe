@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "yiisoft/yii2": ">=2.0.10",
-        "altiore/yii2-base": "^0.5",
+        "altiore/yii2-base": "^0.5.1",
         "yiidoc/yii2-redactor": "^2.0",
         "altiore/yii2-markdown": "^1.0.2"
     },
