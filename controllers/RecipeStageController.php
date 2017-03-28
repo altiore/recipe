@@ -119,7 +119,7 @@ class RecipeStageController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = RecipeStage::find()->with(['ingredients'])->where(['id' => $id])->one()) !== null) {
+        if (($model = RecipeStage::find()->with(['ingredientModels'])->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

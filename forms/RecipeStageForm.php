@@ -92,7 +92,7 @@ class RecipeStageForm extends Model
                     $hasStages = true;
                 }
 
-                $this->recipeStage->unlinkAll('ingredients', true);
+                $this->recipeStage->unlinkAll('ingredientModels', true);
                 if ($hasStages === false) {
                     foreach ($this->ingredients as $ingredient) {
                         if (array_key_exists('name', $ingredient) && $ingredient['name']) {

@@ -46,7 +46,7 @@ ReactIngredientsComponentAsset::register($this);
         <div role="tabpanel" class="tab-pane active" id="ingredients-b">
           <div class="panel panel-default" id="ingredient-panel">
             <div class="panel-body">
-                <?php foreach ($model->recipeStage->ingredients as $i => $item): ?>
+                <?php foreach ($model->recipeStage->ingredientModels as $i => $item): ?>
                   <div class="panel panel-default">
                     <button data-index="<?=$i?>" type="button" class="btn btn-default pull-right remove"><i class="fa fa-times" aria-hidden="true"></i></button>
                     <div class="row">
@@ -62,7 +62,7 @@ ReactIngredientsComponentAsset::register($this);
                     </div>
                   </div>
                 <?php endforeach; ?>
-                <?php $count = count($model->recipeStage->ingredients); ?>
+                <?php $count = count($model->recipeStage->ingredientModels); ?>
                 <?php for ($i = $count; $i < $count + 5; $i++): ?>
                   <div class="panel panel-default">
                     <button data-index="<?=$i?>" type="button" class="btn btn-default pull-right remove"><i class="fa fa-times" aria-hidden="true"></i></button>
