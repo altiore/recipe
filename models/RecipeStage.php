@@ -26,7 +26,7 @@ use yii\db\ActiveRecord;
  *
  * @property User                   $createdBy
  * @property User                   $updatedBy
- * @property RecipeIngredientLink[] $ingredients
+ * @property RecipeIngredientLink[] $ingredientModels
  * @property Image                  $image
  * @property RecipeStage[]          $stages
  */
@@ -156,9 +156,33 @@ class RecipeStage extends ActiveRecord implements ImageSavableInterface
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getIngredientModels()
+    {
+        return $this->hasMany(RecipeIngredientLink::class, ['recipe_stage_id' => 'id'])
+            ->indexBy('ingredient_id');
+    }
+
+    /**
+     * @return RecipeIngredientLink[]
+     */
     public function getIngredients()
     {
-        return $this->hasMany(RecipeIngredientLink::class, ['recipe_stage_id' => 'id']);
+        if ($this->hasStages()) {
+            $ingredients = [];
+            foreach ($this->stages as $stage) {
+                $stageIngredients = $stage->getIngredients();
+                foreach (array_intersect_key($ingredients, $stageIngredients) as $key => $ingredientModel) {
+                    $ingredients[$key]->add($ingredientModel);
+                    unset($stageIngredients[$key]);
+                }
+                $ingredients = $ingredients + $stageIngredients;
+            }
+            return $ingredients;
+        } elseif ($this->stages === null) {
+            return [];
+        }
+
+        return $this->ingredientModels;
     }
 
     /**

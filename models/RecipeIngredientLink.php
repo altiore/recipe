@@ -3,6 +3,7 @@
 namespace altiore\recipe\models;
 
 use Yii;
+use yii\base\InvalidParamException;
 
 /**
  * This is the model class for table "{{%recipe_ingredient_unit_link}}".
@@ -124,5 +125,22 @@ class RecipeIngredientLink extends \yii\db\ActiveRecord
             'amount',
             'unit',
         ];
+    }
+
+    /**
+     * @param RecipeIngredientLink $ingredient
+     * @return $this
+     */
+    public function add(RecipeIngredientLink $ingredient)
+    {
+        if ($ingredient->ingredient_id !== $this->ingredient_id) {
+            throw new InvalidParamException('Parameter not allowed');
+        }
+        if ($ingredient->unit_id !== $this->unit_id) {
+            throw new InvalidParamException('Not implemented yet!');
+        }
+        $this->amount += $ingredient->amount;
+
+        return $this;
     }
 }
