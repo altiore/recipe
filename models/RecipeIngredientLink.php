@@ -112,7 +112,7 @@ class RecipeIngredientLink extends \yii\db\ActiveRecord
      */
     public function getUnit()
     {
-        return $this->unitModel->name;
+        return $this->unitModel->short;
     }
 
     /**
