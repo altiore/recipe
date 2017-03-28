@@ -54,6 +54,6 @@ class Unit extends ActiveRecord
      */
     public static function column()
     {
-        return static::find()->select(['name'])->indexBy('name')->orderBy(['name' => SORT_ASC])->column();
+        return static::find()->select(['name'])->indexBy('short')->orderBy(['name' => SORT_ASC])->column();
     }
 }

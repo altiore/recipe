@@ -42,50 +42,46 @@ ReactIngredientsComponentAsset::register($this);
 
   <!-- Tab panes -->
   <div class="tab-content">
-      <?php if (!$model->recipeStage->hasStages()): ?>
-        <div role="tabpanel" class="tab-pane active" id="ingredients-b">
-          <div class="panel panel-default" id="ingredient-panel">
-            <div class="panel-body">
-                <?php foreach ($model->recipeStage->ingredientModels as $i => $item): ?>
-                  <div class="panel panel-default">
-                    <button data-index="<?=$i?>" type="button" class="btn btn-default pull-right remove"><i class="fa fa-times" aria-hidden="true"></i></button>
-                    <div class="row">
-                        <?= $form->field($item, "[$i]name", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
-                            'data' => Ingredient::column(),
-                            'options' => ['placeholder' => 'Выбери ингредиент ...'],
-                        ]); ?>
-                        <?= $form->field($item, "[$i]amount", ['options' => ['class' => 'col-md-3']])->textInput(); ?>
-                        <?= $form->field($item, "[$i]unit", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
-                            'data' => Unit::column(),
-                            'options' => ['placeholder' => 'Единица измерения ...'],
-                        ]); ?>
-                    </div>
-                  </div>
-                <?php endforeach; ?>
-                <?php $count = count($model->recipeStage->ingredientModels); ?>
-                <?php for ($i = $count; $i < $count + 5; $i++): ?>
-                  <div class="panel panel-default">
-                    <button data-index="<?=$i?>" type="button" class="btn btn-default pull-right remove"><i class="fa fa-times" aria-hidden="true"></i></button>
-                    <div class="row">
-                        <?php $item = new \altiore\recipe\forms\IngredientForm(); ?>
-                        <?= $form->field($item, "[$i]name", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
-                            'data' => Ingredient::column(),
-                            'options' => ['placeholder' => 'Выбери ингредиент ...'],
-                        ]); ?>
-                        <?= $form->field($item, "[$i]amount", ['options' => ['class' => 'col-md-3']])->textInput(); ?>
-                        <?= $form->field($item, "[$i]unit", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
-                            'data' => Unit::column(),
-                            'options' => ['placeholder' => 'Единица измерения ...'],
-                        ]); ?>
-                    </div>
-                  </div>
-                <?php endfor; ?>
-            </div>
-          </div>
+    <div role="tabpanel" class="tab-pane active" id="ingredients-b">
+      <div class="panel panel-default" id="ingredient-panel">
+        <div class="panel-body">
+            <?php foreach ($model->recipeStage->ingredientModels as $i => $item): ?>
+              <div class="panel panel-default">
+                <button data-index="<?=$i?>" type="button" class="btn btn-default pull-right remove"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <div class="row">
+                    <?= $form->field($item, "[$i]name", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
+                        'data' => Ingredient::column(),
+                        'options' => ['placeholder' => 'Выбери ингредиент ...'],
+                    ]); ?>
+                    <?= $form->field($item, "[$i]amount", ['options' => ['class' => 'col-md-3']])->textInput(); ?>
+                    <?= $form->field($item, "[$i]unit", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
+                        'data' => Unit::column(),
+                        'options' => ['placeholder' => 'Единица измерения ...'],
+                    ]); ?>
+                </div>
+              </div>
+            <?php endforeach; ?>
+            <?php $count = count($model->recipeStage->ingredientModels); ?>
+            <?php for ($i = $count; $i < $count + 5; $i++): ?>
+              <div class="panel panel-default">
+                <button data-index="<?=$i?>" type="button" class="btn btn-default pull-right remove"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <div class="row">
+                    <?php $item = new \altiore\recipe\forms\IngredientForm(); ?>
+                    <?= $form->field($item, "[$i]name", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
+                        'data' => Ingredient::column(),
+                        'options' => ['placeholder' => 'Выбери ингредиент ...'],
+                    ]); ?>
+                    <?= $form->field($item, "[$i]amount", ['options' => ['class' => 'col-md-3']])->textInput(); ?>
+                    <?= $form->field($item, "[$i]unit", ['options' => ['class' => 'col-md-4']])->widget(Select2::classname(), [
+                        'data' => Unit::column(),
+                        'options' => ['placeholder' => 'Единица измерения ...'],
+                    ]); ?>
+                </div>
+              </div>
+            <?php endfor; ?>
         </div>
-      <?php else: ?>
-        <div class="alert alert-info" role="alert">Нужно удалить все стадии, чтоб добавить ингредиенты непосредственно в рецепт. Иначе, ингредиенты расчитаются автоматически для данного рецепта</div>
-      <?php endif; ?>
+      </div>
+    </div>
 
     <div role="tabpanel" class="tab-pane <?=$model->recipeStage->hasStages()?'active': '' ?>" id="stages">
       <div class="panel panel-default" id="ingredient-panel">
