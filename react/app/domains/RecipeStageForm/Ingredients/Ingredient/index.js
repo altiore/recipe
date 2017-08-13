@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-// import { createStructuredSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
 
-// import { units } from 'store/entity/units/selectors'
+import { ingredients } from 'store/entity/ingredients/selectors'
 import { Select } from 'components/atoms'
 
 export default connect(
-  state => ({
-    options: state.units.list,
+  createStructuredSelector({
+    options: ingredients,
   })
 )(Select)
