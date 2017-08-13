@@ -1,0 +1,17 @@
+@import "~styles/palette";
+
+.ingredient-field {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+}
+
+.recipe-stage-form {
+  &__remove-wrapper {
+    border-radius: 50%;
+  }
+  &__remove-button {
+    font-size: 36px;
+    color: $red;
+  }
+}

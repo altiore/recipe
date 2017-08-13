@@ -1,0 +1,32 @@
+@import "~styles/palette";
+
+.main {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 6px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-flow: column wrap;
+  min-height: 64px;
+}
+
+.input {
+  line-height: 32px;
+  border: 1px solid $darkGray;
+  border-radius: 4px;
+  margin: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.error {
+  font-size: 10px;
+  color: $red;
+}
+
+.warning {
+  font-size: 10px;
+  color: $yellow;
+}

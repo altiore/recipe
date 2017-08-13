@@ -20,7 +20,7 @@ class Bootstrap implements BootstrapInterface
     public function bootstrap($app) {
         // Set alias for extension source
         Yii::setAlias("@recipe", __DIR__);
-        Yii::setAlias('@recipe_resources', __DIR__ . '/resourses');
+        Yii::setAlias('@recipe_resources', __DIR__ . '/react/dist/static');
 
         // Setup i18n compoment for translate all category user*
         if (!isset(Yii::$app->get('i18n')->translations['recipe*'])) {

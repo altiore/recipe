@@ -28,7 +28,7 @@ class ApiController extends Controller
      */
     public function actionUnits()
     {
-        return Unit::column();
+        return Unit::find()->all();
     }
 
     /**
@@ -40,7 +40,7 @@ class ApiController extends Controller
     public function actionIngredients($id = null)
     {
         if ($id === null) {
-            return Ingredient::column();
+            return Ingredient::find()->all();
         } else {
             return $this->findModel($id)->ingredients;
         }
@@ -55,7 +55,11 @@ class ApiController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = RecipeStage::find()->with(['ingredients'])->where(['id' => $id])->one()) !== null) {
+        $model = RecipeStage::find()
+            ->with(['ingredients'])
+            ->where(['id' => $id])
+            ->one();
+        if ($model !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

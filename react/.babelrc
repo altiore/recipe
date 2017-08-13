@@ -1,0 +1,40 @@
+{
+  "plugins": [
+    "transform-class-properties",
+    "transform-export-extensions"
+  ],
+  "presets": [
+    [
+      "latest",
+      {
+        "es2015": {
+          "modules": false
+        }
+      }
+    ],
+    "react",
+    "stage-0"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ],
+      "presets": [
+      ]
+    },
+    "development": {
+      "presets": [
+      ],
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    },
+    "test": {
+      "presets": [
+      ],
+      "plugins": [
+      ]
+    }
+  }
+}

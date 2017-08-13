@@ -1,0 +1,14 @@
+#root {
+  position: relative;
+}
+
+.recipe-stage-form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  position: absolute;
+  padding: 2%;
+  background-color: #ECF0F5;
+  min-width: 96%;
+}
