@@ -3,6 +3,7 @@
 namespace altiore\recipe\controllers;
 
 use altiore\recipe\models\Ingredient;
+use altiore\recipe\models\RecipeCategory;
 use altiore\recipe\models\RecipeStage;
 use altiore\recipe\models\Unit;
 use Yii;
@@ -44,6 +45,14 @@ class ApiController extends Controller
         } else {
             return $this->findModel($id)->ingredients;
         }
+    }
+
+    /**
+     * @return RecipeCategory[]|array
+     */
+    public function actionRecipeCategories()
+    {
+        return RecipeCategory::find()->all();
     }
 
     /**
