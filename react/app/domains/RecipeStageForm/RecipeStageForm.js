@@ -7,12 +7,13 @@ class RecipeStageForm extends PureComponent {
   static propTypes = {
     fetchIngredients: PropTypes.func.isRequired,
     fetchUnits: PropTypes.func.isRequired,
+    fetchRecipeCategories: PropTypes.func.isRequired,
   }
 
   componentDidMount () {
-    const { fetchIngredients, fetchUnits } = this.props
-    fetchIngredients()
-    fetchUnits()
+    this.props.fetchIngredients()
+    this.props.fetchUnits()
+    this.props.fetchRecipeCategories()
   }
 
   handleSubmit = (values) => console.log('handleSubmit', values)

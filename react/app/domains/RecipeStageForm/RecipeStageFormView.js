@@ -5,6 +5,7 @@ import { reduxForm, Form, Field, FieldArray } from 'redux-form'
 import { File, TextArea, Button } from 'components/atoms'
 import Input from 'containers/Input'
 import Ingredients from './Ingredients'
+import RecipeCategories from './RecipeCategories'
 import './styles.scss'
 
 const RecipeStageFormView = ({ handleSubmit }) => (
@@ -16,6 +17,14 @@ const RecipeStageFormView = ({ handleSubmit }) => (
       label='Название'
       placeholder='Название рецепта или этапа (шага)'
       component={Input}
+    />
+
+    <Field
+      name='categories'
+      showLabel
+      label='Категории'
+      placeholder='Рецепт принадлежит категориям...'
+      component={RecipeCategories}
     />
 
     <Field
@@ -35,6 +44,7 @@ const RecipeStageFormView = ({ handleSubmit }) => (
 
     <FieldArray
       name='ingredients'
+      label='Ингредиенты'
       component={Ingredients}
     />
 

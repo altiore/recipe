@@ -4,12 +4,14 @@ import thunk from 'redux-thunk'
 import clientsMiddleware from 'store/clients/clientsMiddleware'
 import ingredients from 'store/entity/ingredients/reducer'
 import units from 'store/entity/units/reducer'
+import recipeCategories from 'store/entity/recipeCategories/reducer'
 import { reducer as form } from 'redux-form'
 
 export const rootReducer = combineReducers({
   form,
   ingredients,
   units,
+  recipeCategories,
 })
 
 const createStore = (initialState, historyMiddleware) => {
